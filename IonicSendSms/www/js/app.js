@@ -25,13 +25,14 @@ var app = angular.module('starter', ['ionic', 'ngCordova'])
   });
 })
 
+//Controller to handle SMS
 app.controller('SMSController', function($scope, $cordovaSms) {
   $scope.sms={
       number: 12462415241,
       message: "Put GPS coordinates here for https://www.google.com/maps/"
   }; 
   document.addEventListener("deviceready", function() {
-  console.log("Entered function");
+  
   var options = {
     replaceLineBreaks: false, // true to replace \n by a new line, false by default
     android: {
@@ -43,13 +44,13 @@ app.controller('SMSController', function($scope, $cordovaSms) {
  console.log($scope.sms.number);
  console.log($scope.sms.message);
  
- 
+ //actual sms send function
   $scope.sendSMS = function() {
  
     $cordovaSms
-      .send($scope.sms.number, $scope.sms.message, options)
+      .send($scope.sms.number, $scope.sms.message, options) //take number and message from scope
       .then(function() {
-        console.log('Success'); 
+        console.log('Success');  
         alert('Success');
         // Success! SMS was sent
       }, function(error) {
